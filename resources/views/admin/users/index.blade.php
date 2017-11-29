@@ -2,6 +2,16 @@
 
 @section('content')
 
+    @if(Session::has('deleted_user'))
+        <p class="bg-danger">{{session('deleted_user')}}</p>
+    @endif
+    @if(Session::has('updated_user'))
+        <p class="bg-danger">{{session('updated_user')}}</p>
+    @endif
+    @if(Session::has('created_user'))
+        <p class="bg-danger">{{session('deleted_user')}}</p>
+    @endif
+
     <h1>Users</h1>
 
     <table class="table table-hover">
@@ -25,7 +35,7 @@
             @foreach($users as $user)
             <tr>
                 <td>{{$user->id}}</td>
-                <td><img src="{{$user->photo ? $user->photo->path : 'https://placehold.it/50x50'}}" alt="" class="img-responsive img-rounded"></td>
+                <td><img width="50" src="{{$user->photo ? $user->photo->getUserPhoto($user->photo->path) : 'https://placehold.it/50x50'}}" alt="" class="img-responsive img-rounded"></td>
                 <td><a href="{{route('users.edit', $user->id)}}">{{$user->name}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->role->name}}</td>

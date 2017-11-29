@@ -8,6 +8,7 @@ use App\Photo;
 use App\Role;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class AdminUsersController extends Controller
 {
@@ -62,9 +63,9 @@ class AdminUsersController extends Controller
         }
 
         User::create($user);
-
+        Session::flash('created_user', 'The user has been created successfully');
         return redirect('/admin/users');
-        /*return $request->all();*/
+
     }
 
     /**
@@ -121,9 +122,9 @@ class AdminUsersController extends Controller
         }
 
         $user->update($input);
-
+        Session::flash('updated_user', 'The user has been updated successfully');
         return redirect('/admin/users');
-        //return view('admin.users.edit');
+
     }
 
     /**
@@ -134,6 +135,11 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        return view('admin.users.edit');
+        $user = User::findOrFail($id);
+        unlink(public_path() . $user->photo->path);
+        $user->delete();
+        Session::flash('deleted_user', 'The user have been deleted successfully');
+        return redirect('/admin/users');
+
     }
 }

@@ -5,7 +5,7 @@
     <h1>Edit user</h1>
 
     <div class="col-sm-3">
-        <img src="{{$user->photo ? $user->photo->path : 'https://placehold.it/400x400'}}" alt="" class="img-responsive img-rounded">
+        <img src="{{$user->photo ? $user->photo->getUserPhoto($user->photo->path) : 'https://placehold.it/400x400'}}" alt="" class="img-responsive img-rounded">
     </div>
 
     <div class="col-sm-9">
@@ -40,8 +40,17 @@
         </div>
 
         <div class="form-group">
-            {!! Form::submit('Create User', ['class'=>'btn btn-primary']) !!}
+            {!! Form::submit('Update User', ['class'=>'btn btn-primary col-sm-3']) !!}
         </div>
+        {!! Form::close() !!}
+
+
+
+        {!! Form::open(['method'=>'DELETE', 'action'=>['AdminUsersController@destroy', $user->id]]) !!}
+
+            <div class="form-group">
+                {!! Form::submit('Delete user', ['class'=>'btn btn-danger pull-right']) !!}
+            </div>
         {!! Form::close() !!}
 
         @include('includes.form-error')
