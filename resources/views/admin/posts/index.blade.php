@@ -3,6 +3,18 @@
 
 @section('content')
 
+    @if(Session::has('deleted_post'))
+            <p class="bg-danger">{{session('deleted_post')}}</p>
+    @endif
+
+    @if(Session::has('updated_post'))
+        <p class="bg-danger">{{session('updated_post')}}</p>
+    @endif
+
+    @if(Session::has('created_post'))
+        <p class="bg-danger">{{session('deleted_post')}}</p>
+    @endif
+
     <h1>Posts</h1>
 <table class="table table-hover">
     <thead>
@@ -27,8 +39,8 @@
             <td>{{$post->id}}</td>
             <td>{{$post->user->name}}</td>
             <td>{{$post->category ? $post->category->name : 'Uncategorized'}}</td>
-            <td><img width="100" src="{{$post->photo ? $post->photo->getPostPhoto($post->photo->path) : 'http://placehold.it/400x400'}}"=</td>
-            <td>{{$post->title}}</td>
+            <td><img width="100" src="{{$post->photo ? $post->photo->getPostPhoto($post->photo->path) : 'http://placehold.it/100x100'}}"=</td>
+            <td><a href="{{route('posts.edit', $post->id)}}">{{$post->title}}</a></td>
             <td>{{$post->body}}</td>
             <td>{{$post->meta_title}}</td>
             <td>{{$post->meta_desc}}</td>

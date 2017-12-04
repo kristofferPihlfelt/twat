@@ -9,6 +9,7 @@ use App\Post;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class AdminPostsController extends Controller
 {
@@ -61,6 +62,9 @@ class AdminPostsController extends Controller
         //Create post
         $user->posts()->create($input);
 
+        //display message from session
+        Session::flash('created_post', 'The post was created successfully');
+
         //redirect to route
         return redirect('/admin/posts');
 
@@ -88,7 +92,10 @@ class AdminPostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $categories = Category::pluck('name', 'id');
+
+        return view('admin.posts.edit', compact('post', 'categories'));
     }
 
     /**
@@ -100,7 +107,23 @@ class AdminPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $input = $request->all();
+
+        if( $file = $request->file('photo_id')) {
+            //Set name for file
+            $name = time() . '-' . $file->getClientOriginalName();
+            //move the file
+            $file->move('images/posts', $name);
+            //create the photo
+            $photo = Photo::create(['path' => $name]);
+            //insert the photo id
+            $input['photo_id'] = $photo->id;
+        };
+
+        Auth::user()->posts()->whereId($id)->first()->update($input);
+        Session::flash('updated_post', 'The post was updated successfully');
+        return redirect('/admin/posts');
+
     }
 
     /**
@@ -111,6 +134,11 @@ class AdminPostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        unlink(public_path() . $post->photo->getPostPhoto($post->photo->path));
+        $post->photo->delete();
+        $post->delete();
+        Session::flash('deleted_post', 'The post was deleted successfully');
+        return redirect('/admin/posts');
     }
 }
