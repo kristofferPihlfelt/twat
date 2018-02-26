@@ -7,7 +7,7 @@
 
     <div class="row">
         <div class="col-sm-3">
-            <img src="{{$post->photo->getPostPhoto($post->photo->path)}}" class="img-responsive">
+            <img src="{{$post->photo->path}}" class="img-responsive">
 
         </div>
 

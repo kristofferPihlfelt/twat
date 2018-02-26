@@ -57,7 +57,7 @@ class AdminUsersController extends Controller
 
         if($file = $request->file('photo_id')) {
             $name = time() . '-' . $file->getClientOriginalName();
-            $file->move('images/users', $name);
+            $file->move('images', $name);
             $photo = Photo::create(['path'=>$name]);
             $user['photo_id'] = $photo->id;
         }
@@ -116,7 +116,7 @@ class AdminUsersController extends Controller
 
         if($file = $request->file('photo_id')) {
             $name = time() . '-' . $file->getClientOriginalName();
-            $file->move('images/users', $name);
+            $file->move('images', $name);
             $photo = Photo::create(['path'=>$name]);
             $input['photo_id'] = $photo->id;
         }
@@ -136,7 +136,7 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         $user = User::findOrFail($id);
-        unlink(public_path() . $user->photo->getUserPhoto($user->photo->path));
+        unlink(public_path() . $user->photo->path);
         $user->photo->delete();
         $user->delete();
         Session::flash('deleted_user', 'The user have been deleted successfully');

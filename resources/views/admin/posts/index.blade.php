@@ -19,6 +19,7 @@
 <table class="table table-hover">
     <thead>
         <tr>
+            <th>Post</th>
             <th>Id</th>
             <th>User</th>
             <th>Category</th>
@@ -36,16 +37,18 @@
     @if($posts)
         @foreach($posts as $post)
         <tr>
+            <td><a href="{{route('home.post', $post->id)}}">View post</a> </td>
             <td>{{$post->id}}</td>
             <td>{{$post->user->name}}</td>
             <td>{{$post->category ? $post->category->name : 'Uncategorized'}}</td>
-            <td><img width="100" src="{{$post->photo ? $post->photo->getPostPhoto($post->photo->path) : 'http://placehold.it/100x100'}}"=</td>
+            <td><img width="100" src="{{$post->photo ? $post->photo->path : 'http://placehold.it/100x100'}}"=</td>
             <td><a href="{{route('posts.edit', $post->id)}}">{{$post->title}}</a></td>
             <td>{{$post->body}}</td>
             <td>{{$post->meta_title}}</td>
             <td>{{$post->meta_desc}}</td>
             <td>{{$post->created_at->diffForHumans()}}</td>
             <td>{{$post->updated_at->diffForHumans()}}</td>
+            <td><a href="{{route('comments.show', $post->id)}}">View Comments</a></td>
         </tr>
         @endforeach
     @endif

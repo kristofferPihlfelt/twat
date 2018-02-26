@@ -52,7 +52,7 @@ class AdminPostsController extends Controller
             //Set name for file
             $name = time() . '-' . $file->getClientOriginalName();
             //move the file
-            $file->move('images/posts', $name);
+            $file->move('images', $name);
             //create the photo
             $photo = Photo::create(['path' => $name]);
             //insert the photo id
@@ -113,7 +113,7 @@ class AdminPostsController extends Controller
             //Set name for file
             $name = time() . '-' . $file->getClientOriginalName();
             //move the file
-            $file->move('images/posts', $name);
+            $file->move('images', $name);
             //create the photo
             $photo = Photo::create(['path' => $name]);
             //insert the photo id
@@ -135,10 +135,20 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
-        unlink(public_path() . $post->photo->getPostPhoto($post->photo->path));
+        unlink(public_path() . $post->photo->path);
         $post->photo->delete();
         $post->delete();
         Session::flash('deleted_post', 'The post was deleted successfully');
         return redirect('/admin/posts');
+    }
+
+
+    public function post($id){
+
+        $post = Post::findOrFail($id);
+
+        $comments = $post->comments()->whereIsActive(1)->get();
+
+        return view('post', compact('post', 'comments'));
     }
 }
