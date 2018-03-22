@@ -25,9 +25,16 @@ Route::get('/post/{id}', ['as'=>'home.post', 'uses'=>'AdminPostsController@post'
 
 Route::group(['middleware'=>'admin'], function() {
 
-    Route::get('/admin', function() {
+    /*Route::get('/admin', function() {
         return view('admin.index');
-    });
+    });*/
+
+
+   /* Route::resource('/admin', 'EventController', ['only' => [
+        'index'
+    ]]);*/
+
+    Route::get('admin', 'AdminDashboardController@index');
 
     Route::resource('admin/users', 'AdminUsersController');
 
@@ -39,6 +46,10 @@ Route::group(['middleware'=>'admin'], function() {
 
     Route::resource('admin/comments', 'PostCommentsController');
     Route::resource('admin/comments/replies', 'CommentRepliesController');
+
+    Route::resource('admin/tasks', 'AdminTaskController');
+
+    Route::resource('admin/events', 'EventController');
 
 
 });

@@ -1,7 +1,11 @@
 @extends('layouts.admin')
 
+@section('styles')
+    <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+    @endsection
 
 @section('content')
+
 
     <h1>Create post</h1>
 
@@ -12,10 +16,11 @@
                 {!! Form::text('title', null, ['class'=>'form-control']) !!}
             </div>
 
-            <div class="form-group">
+            <div class="form-group" id="editor">
                 {!! Form::label('body', 'Body:') !!}
                 {!! Form::textarea('body', null, ['class'=>'form-control']) !!}
             </div>
+
 
             <div class="form-group">
                 {!! Form::label('photo_id', 'Photo cover:') !!}
@@ -44,8 +49,21 @@
         {!! Form::close() !!}
     </div>
 
+
     <div class="row">
         @include('includes.form-error')
     </div>
 
 @stop
+
+@section('scripts')
+    <!-- Include the Quill library -->
+    <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+
+    <!-- Initialize Quill editor -->
+    <script>
+        var quill = new Quill('#editor', {
+            theme: 'snow'
+        });
+    </script>
+    @endsection

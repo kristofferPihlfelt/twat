@@ -2,12 +2,17 @@
 
 namespace App;
 
-
 use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+
+    use Sluggable;
+    use SluggableScopeHelpers;
+
+
     protected $fillable = [
         'title',
         'category_id',
@@ -17,6 +22,22 @@ class Post extends Model
         'meta_title',
         'meta_desc',
     ];
+
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title',
+                'onUpdate' => true,
+            ]
+        ];
+    }
 
     public function user()
     {

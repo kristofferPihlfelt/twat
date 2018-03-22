@@ -37,7 +37,7 @@
     @if($posts)
         @foreach($posts as $post)
         <tr>
-            <td><a href="{{route('home.post', $post->id)}}">View post</a> </td>
+            <td><a href="{{route('home.post', $post->slug)}}">View post</a> </td>
             <td>{{$post->id}}</td>
             <td>{{$post->user->name}}</td>
             <td>{{$post->category ? $post->category->name : 'Uncategorized'}}</td>
@@ -55,4 +55,10 @@
 
     </tbody>
 </table>
+
+    <div class="row">
+        <div class="col-sm-5 col-sm-offset-5">
+            {{$posts->render()}}
+        </div>
+    </div>
 @stop

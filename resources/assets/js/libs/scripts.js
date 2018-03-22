@@ -60,4 +60,11 @@ $(document).ready(function(){
 
     $('[data-toggle="tooltip"]').tooltip();
 
+    /**************** turn each textarea to ckeditor **********************/
+    /*$("textarea").each(function(){
+        CKEDITOR.classic( this );
+    });*/
+
+
 });
+

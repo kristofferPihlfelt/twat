@@ -2328,7 +2328,7 @@ if (typeof jQuery === 'undefined') {
  * Made by Osman Nuri Okumus
  * Under MIT License
  */
-;(function($, window, document, undefined) {
+(function($, window, document, undefined) {
 
     var pluginName = "metisMenu",
         defaults = {

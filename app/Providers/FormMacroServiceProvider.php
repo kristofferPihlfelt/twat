@@ -2,22 +2,19 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
 use Form;
+use Illuminate\Support\ServiceProvider;
 
-
-class AppServiceProvider extends ServiceProvider
+class FormMacroServiceProvider extends ServiceProvider
 {
-
     /**
-     * Bootstrap any application services.
+     * Bootstrap the application services.
      *
      * @return void
      */
     public function boot()
     {
-        Schema::defaultStringLength(191);
+
 
     }
 
