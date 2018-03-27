@@ -9,7 +9,7 @@
         <div class="row">
             <h2>New event</h2>
             <div class="col-sm-6">
-                {!! Form::open(['method'=>'POST', 'action'=>'EventController@store']) !!}
+                {!! Form::open(['method'=>'POST', 'action'=>'AdminEventController@store']) !!}
                 <div class="form-group">
                     {!! Form::label('Titel', 'Title:') !!}
                     {!! Form::text('title', null, ['class'=>'form-control']) !!}
@@ -17,6 +17,16 @@
                 <div class="form-group">
                     {!! Form::label('description', 'Description:') !!}
                     {!! Form::textarea('description', null, ['class'=>'form-control', 'rows'=>3]) !!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('category_id', 'Campaign type:') !!}
+                    {!! Form::select('category_id', array(''=>'Select campaign type') + $categories, null, ['class'=>'form-control']) !!}
+                </div>
+
+                <div class="form-group">
+                    {!! Form::label('channel_id', 'Channel:') !!}
+                    {!! Form::select('channel_id', array(''=>'Select Channel') + $channels, null, ['class'=>'form-control']) !!}
                 </div>
 
                 <div class="form-group">

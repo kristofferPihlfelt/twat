@@ -52,6 +52,7 @@
                 <tr>
                     <th>Title</th>
                     <th>Task</th>
+                    <th>Event</th>
                     <th>Assigned to</th>
                     <th>Status</th>
                 </tr>
@@ -63,7 +64,8 @@
                     <tr>
                         <td>{{$task->title}}</td>
                         <td>{{$task->task}}</td>
-                        <td>{{$task->assignedTo['name']}}</td>
+                        <td>{{$task->event ? $task->event->title : 'no event'}}</td>
+                        <td>{{$task->assignedTo ? $task->assignedTo->name : 'not assigned'}}</td>
                         <td>
                             {!! Form::open(['method'=>'PATCH', 'action'=>['AdminTaskController@update', $task->id]]) !!}
                             <input type="hidden" name="is_completed" value="1">

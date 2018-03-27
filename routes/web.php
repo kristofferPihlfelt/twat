@@ -23,18 +23,23 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/post/{id}', ['as'=>'home.post', 'uses'=>'AdminPostsController@post']);
 
 
+
+
 Route::group(['middleware'=>'admin'], function() {
 
-    /*Route::get('/admin', function() {
-        return view('admin.index');
-    });*/
-
-
-   /* Route::resource('/admin', 'EventController', ['only' => [
-        'index'
-    ]]);*/
 
     Route::get('admin', 'AdminDashboardController@index');
+
+    // Routes for event settings
+    Route::get('/admin/events/settings', ['as'=>'events.settings', 'uses'=>'AdminEventSettingsController@index']);
+    Route::delete('/admin/events/settings/delete/category/{id}', ['as' => 'settings.delete.category', 'uses' => 'AdminEventSettingsController@destroyCategory']);
+    Route::delete('/admin/events/settings/delete/channel/{id}', ['as' => 'settings.delete.channel', 'uses' => 'AdminEventSettingsController@destroyChannel']);
+    Route::post('/admin/events/settings/store/channel', ['as' => 'settings.store.channel', 'uses' => 'AdminEventSettingsController@storeChannel']);
+    Route::post('/admin/events/settings/store/category', ['as' => 'settings.store.category', 'uses' => 'AdminEventSettingsController@storeCategory']);
+
+    // Routes for Event product list
+    Route::resource('/admin/events/productlist', 'AdminEventProductListController');
+    Route::post('/admin/events/productlist/store/product', ['as' => 'events.productlist.store.product', 'uses' => 'AdminEventProductListController@storeProduct']);
 
     Route::resource('admin/users', 'AdminUsersController');
 
@@ -49,7 +54,11 @@ Route::group(['middleware'=>'admin'], function() {
 
     Route::resource('admin/tasks', 'AdminTaskController');
 
-    Route::resource('admin/events', 'EventController');
+    Route::resource('admin/events', 'AdminEventController');
+
+
+
+
 
 
 });

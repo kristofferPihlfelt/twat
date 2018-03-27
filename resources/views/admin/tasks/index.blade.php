@@ -36,8 +36,8 @@
                     <tr>
                         <td>{{$task->title}}</td>
                         <td>{{$task->task}}</td>
-                        <td>{{$task->assignedTo['name']}}</td>
-                        <td>{{$task->relatedEvent['title']}}</td>
+                        <td>{{$task->assignedTo ? $task->assignedTo->name : 'not assigned'}}</td>
+                        <td>{{$task->event? $task->event->title : 'no campaign'}}</td>
                         <td>{{$task->created_at->diffForHumans()}}</td>
                         <td>
                             <div class="row">
@@ -89,10 +89,10 @@
                             <td><del>{{$task->title}}</del></td>
                             <td><del>{{$task->task}}</del></td>
                             <td><del>{{$task->user->name}}</del></td>
-                            <td><del>{{$task->assignedTo['name']}}</del></td>
-                            <td><del>{{$task->relatedEvent['title']}}</del></td>
+                            <td><del>{{$task->assignedTo ? $task->assignedTo->name : 'not assigned'}}</del></td>
+                            <td><del>{{$task->event? $task->event->title : 'no campaign'}}</del></td>
                             <td><del>{{$task->created_at->diffForHumans()}}</del></td>
-                            <td><del>{{$task->is_completed > 0 ? $task->updated_at->diffForHumans() : 'Not completed'}}</del></td>
+                            <td>{{$task->is_completed > 0 ? $task->updated_at->diffForHumans() : 'Not completed'}}</td>
                             <td>
                                 {!! Form::open(['method'=>'PATCH', 'action'=>['AdminTaskController@update', $task->id]]) !!}
                                 <input type="hidden" name="is_completed" value="0">

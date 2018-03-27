@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\EventProductList;
 use Calendar;
 use App\Event;
+use App\EventCategory;
+use App\EventChannel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class EventController extends Controller
+class AdminEventController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -46,7 +49,9 @@ class EventController extends Controller
      */
     public function create()
     {
-        return view('admin.events.create');
+        $categories = EventCategory::pluck('name', 'id')->all();
+        $channels = EventChannel::pluck('name', 'id')->all();
+        return view('admin.events.create', compact('categories', 'channels'));
     }
 
     /**
@@ -57,9 +62,12 @@ class EventController extends Controller
      */
     public function store(Request $request)
     {
+
         $data = array(
             'title' => $request->title,
             'description' => $request->description,
+            'event_category_id' => $request->category_id,
+            'event_channel_id' => $request->channel_id,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
         );
@@ -88,8 +96,12 @@ class EventController extends Controller
      */
     public function edit($id)
     {
+//        $productlist = EventProductList::where('event_id', $id)->pluck('name', 'id');
+        $productlists = EventProductList::all()->where('event_id', '==', $id);
         $event = Event::find($id);
-        return view('admin.events.edit', compact('event'));
+        $categories = EventCategory::pluck('name', 'id')->all();
+        $channels = EventChannel::pluck('name', 'id')->all();
+        return view('admin.events.edit', compact('event', 'categories', 'channels', 'productlists'));
     }
 
     /**
@@ -120,4 +132,6 @@ class EventController extends Controller
         Session::flash('deleted_event', 'The event was deleted successfully');
         return redirect('/admin/events');
     }
+
+
 }

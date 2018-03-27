@@ -132,6 +132,7 @@
                                 <ul class="nav collapse" id="submenu6" role="menu" aria-labelledby="btn-6">
                                     <li><a href="{{route('events.index')}}">All events</a></li>
                                     <li><a href="{{route('events.create')}}">Create event</a></li>
+                                    <li><a href="{{route('events.settings')}}">Settings</a></li>
                                 </ul>
                             </li>
 

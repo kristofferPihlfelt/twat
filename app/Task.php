@@ -24,9 +24,6 @@ class Task extends Model
         return $this->belongsTo('App\User', 'assigned_user_id');
     }
 
-    public function relatedEvent() {
-        return $this->belongsTo('App\Event', 'event_id');
-    }
 
     use FormAccessible;
 

@@ -15,6 +15,7 @@ class CreateEventChannelsTable extends Migration
     {
         Schema::create('event_channels', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name')->nullable();
             $table->timestamps();
         });
     }
