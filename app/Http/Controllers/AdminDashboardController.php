@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Calendar;
 use App\Event;
 use App\Task;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class AdminDashboardController extends Controller
@@ -38,9 +39,10 @@ class AdminDashboardController extends Controller
 
         $calendar = Calendar::addEvents($events);
         $tasks = Task::all()->sortByDesc('created_at')->where('is_completed', '<', 1)->take(8);
+        $events = Event::all()->sortByDesc('created_at')->where('end_date', '>', Carbon::now())->take(2);
 
 
-        return view('admin.index', compact('calendar', 'tasks'));
+        return view('admin.index', compact('calendar', 'tasks', 'events'));
     }
 
     /**

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\EventProductList;
+use App\Task;
+use App\User;
 use Calendar;
 use App\Event;
 use App\EventCategory;
@@ -19,6 +21,7 @@ class AdminEventController extends Controller
      */
     public function index()
     {
+        
         $events = [];
         $data = Event::all();
         if($data->count()) {
@@ -39,7 +42,7 @@ class AdminEventController extends Controller
         }
 
         $calendar = Calendar::addEvents($events);
-        return view('admin.events.index', compact('calendar'));
+        return view('admin.events.index', compact('calendar', 'data'));
     }
 
     /**
@@ -99,9 +102,12 @@ class AdminEventController extends Controller
 //        $productlist = EventProductList::where('event_id', $id)->pluck('name', 'id');
         $productlists = EventProductList::all()->where('event_id', '==', $id);
         $event = Event::find($id);
+        $users = User::where('is_active', 1)->pluck('name', 'id')->all();
         $categories = EventCategory::pluck('name', 'id')->all();
         $channels = EventChannel::pluck('name', 'id')->all();
-        return view('admin.events.edit', compact('event', 'categories', 'channels', 'productlists'));
+        $tasks = Task::all()->sortByDesc('created_at');
+        //return $tasks;
+        return view('admin.events.edit', compact('event', 'users', 'categories', 'channels', 'productlists', 'tasks'));
     }
 
     /**

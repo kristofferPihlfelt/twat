@@ -60,11 +60,10 @@ $(document).ready(function(){
 
     $('[data-toggle="tooltip"]').tooltip();
 
-    /**************** turn each textarea to ckeditor **********************/
-    /*$("textarea").each(function(){
-        CKEDITOR.classic( this );
-    });*/
+    /**************** change calendar font size **********************/
+    $('.fc').css('font-size', '0.8rem');
 
+    console.log('hej');
 
 });
 

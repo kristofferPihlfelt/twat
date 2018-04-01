@@ -8,18 +8,10 @@
 @section('content')
 
     <div class="row">
-        <h1>Dashboard</h1>
+        <h2>Dashboard</h2>
     </div>
 
-    <div class="row">
-        <div class='col-md-6'>
-            <h2>Events</h2>
-        </div>
-        <div class="col-md-6">
-            <h2>Tasks</h2>
-        </div>
 
-    </div>
     <div class="row">
         <div class="msg col-sm-12 col-md-6">
             @if(Session::has('deleted_event'))
@@ -36,9 +28,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-12 col-md-5">
             <div class="panel panel-default">
-                <div class="panel-heading">Kalender</div>
+                <div class="panel-heading">
+                    <h4>Calendar</h4>
+                </div>
 
                 <div class="panel-body">
                     {!! $calendar->calendar() !!}
@@ -46,39 +40,87 @@
             </div>
         </div>
 
-        <div class="col-sm-12 col-md-6">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Task</th>
-                    <th>Event</th>
-                    <th>Assigned to</th>
-                    <th>Status</th>
-                </tr>
-                </thead>
+        <div class="col-sm-12 col-md-7">
+            <div class="row">
+                <div class="panel panel-default">
 
-                <tbody>
+                    <div class="panel-heading">
+                        <h4>Tasks</h4>
+                    </div>
+                    <div class="panel-body">
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Task</th>
+                                <th>Event</th>
+                                <th>Assigned to</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
 
-                @foreach($tasks as $task)
-                    <tr>
-                        <td>{{$task->title}}</td>
-                        <td>{{$task->task}}</td>
-                        <td>{{$task->event ? $task->event->title : 'no event'}}</td>
-                        <td>{{$task->assignedTo ? $task->assignedTo->name : 'not assigned'}}</td>
-                        <td>
-                            {!! Form::open(['method'=>'PATCH', 'action'=>['AdminTaskController@update', $task->id]]) !!}
-                            <input type="hidden" name="is_completed" value="1">
-                            <div class="form-group">
-                                {!! Form::button('<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>', ['type' => 'submit', 'class' => 'btn btn-success btn-sm'] )  !!}
+                            <tbody>
+                            @foreach($tasks as $task)
+                                <tr class="product-list">
+                                    <td>{{$task->title}}</td>
+                                    <td>{{$task->task}}</td>
+                                    <td>{{$task->event ? $task->event->title : 'no event'}}</td>
+                                    <td>{{$task->assignedTo ? $task->assignedTo->name : 'not assigned'}}</td>
+                                    <td>
+                                        {!! Form::open(['method'=>'PATCH', 'action'=>['AdminTaskController@update', $task->id]]) !!}
+                                        <input type="hidden" name="is_completed" value="1">
+                                        <div class="form-group">
+                                            {!! Form::button('<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>', ['type' => 'submit', 'class' => 'btn btn-success btn-sm'] )  !!}
+                                        </div>
+                                        {!! Form::close() !!}
+                                    </td>
+
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            @if($events)
+
+                    <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4>Events</h4>
                             </div>
-                            {!! Form::close() !!}
-                        </td>
+                            <div class="panel-body">
+                              <table class="table table-hover">
+                                  <thead>
+                                  <tr>
+                                      <th>Event</th>
+                                      <th>Description</th>
+                                      <th>Type</th>
+                                      <th>Channel</th>
+                                      <th>Start</th>
+                                      <th>End</th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  @foreach($events as $event)
+                                      <tr class="product-list">
+                                          <td>{{$event->title}}</td>
+                                          <td>{{$event->description}}</td>
+                                          <td>{{$event->category->name}}</td>
+                                          <td>{{$event->channel->name}}</td>
+                                          <td>{{$event->start_date}}</td>
+                                          <td>{{$event->end_date}}</td>
+                                          <td><a href="{{route('events.edit', $event->id)}}"><button class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button></a></td>
+                                      </tr>
+                                  @endforeach
+                                  </tbody>
 
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+                              </table>
+                            </div>
+                        </div>
+                    </div>
+
+            @endif
         </div>
     </div>
 

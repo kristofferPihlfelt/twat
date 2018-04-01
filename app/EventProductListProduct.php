@@ -23,7 +23,7 @@ class EventProductListProduct extends Model
 
 
     public function productlist() {
-        return $this->belongsTo('App\EventProductList');
+        return $this->belongsTo('App\EventProductList', 'list_id');
     }
 
     protected $table = 'event_product_lists_products';

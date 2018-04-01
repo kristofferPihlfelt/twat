@@ -6,10 +6,10 @@
         <p class="bg-danger">{{session('deleted_user')}}</p>
     @endif
     @if(Session::has('updated_user'))
-        <p class="bg-danger">{{session('updated_user')}}</p>
+        <p class="bg-success">{{session('updated_user')}}</p>
     @endif
     @if(Session::has('created_user'))
-        <p class="bg-danger">{{session('deleted_user')}}</p>
+        <p class="bg-success">{{session('deleted_user')}}</p>
     @endif
 
     <h1>Users</h1>
@@ -38,7 +38,7 @@
                 <td><img width="50" src="{{$user->photo ? $user->photo->path : 'https://placehold.it/50x50'}}" alt="" class="img-responsive img-rounded"></td>
                 <td><a href="{{route('users.edit', $user->id)}}">{{$user->name}}</td>
                 <td>{{$user->email}}</td>
-                <td>{{$user->role->name}}</td>
+                <td>{{$user->role ? $user->role->name : 'No active role'}}</td>
                 <td>{{$user->is_active == 1 ? 'Active' : 'Inactive'}}</td>
                 <td>{{$user->created_at->DiffForHumans()}}</td>
                 <td>{{$user->updated_at->DiffForHumans()}}</td>

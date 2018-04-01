@@ -20,6 +20,7 @@ class AdminEventProductListController extends Controller
         //
     }
 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -73,9 +74,11 @@ class AdminEventProductListController extends Controller
      * @param  \App\EventProductList  $eventProductList
      * @return \Illuminate\Http\Response
      */
-    public function show(EventProductList $eventProductList)
+    public function show($id)
     {
-        //
+        $products = EventProductListProduct::all()->where('list_id', '==', $id);
+        $productList = EventProductList::all()->where('id', '==', $id);
+        return view('admin.events.productlist.show', compact('products', 'productList', 'id'));
     }
 
     /**
@@ -115,8 +118,10 @@ class AdminEventProductListController extends Controller
      * @param  \App\EventProductList  $eventProductList
      * @return \Illuminate\Http\Response
      */
-    public function destroy(EventProductList $eventProductList)
+    public function destroy($id)
     {
-        //
+        $productList = EventProductList::findOrFail($id);
+        $productList->delete();
+        return redirect('admin/events/');
     }
 }

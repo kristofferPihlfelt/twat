@@ -56,7 +56,7 @@ class AdminTaskController extends Controller
 
         Task::create($data);
         Session::flash('created_task', 'The task was created successfully');
-        return redirect ('/admin/tasks');
+        return back();
     }
 
     /**
@@ -91,7 +91,7 @@ class AdminTaskController extends Controller
     public function update(Request $request, $id)
     {
         Task::findOrFail($id)->update($request->all());
-        return redirect('/admin/tasks');
+        return back();
     }
 
     /**

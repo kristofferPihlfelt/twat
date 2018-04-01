@@ -17,12 +17,12 @@ class Event extends Model
 
     public function category()
     {
-        return $this->belongsTo('App\EventCategory');
+        return $this->belongsTo('App\EventCategory', 'event_category_id');
     }
 
     public function channel()
     {
-        return $this->belongsTo('App\EventChannel');
+        return $this->belongsTo('App\EventChannel', 'event_channel_id');
     }
 
     public function productlist()
