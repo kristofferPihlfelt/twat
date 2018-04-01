@@ -50,7 +50,7 @@
                     <div class="panel-body">
                         <table class="table table-hover">
                             <thead>
-                            <tr>
+                            <tr class="product-list">
                                 <th>Title</th>
                                 <th>Task</th>
                                 <th>Event</th>
@@ -92,7 +92,7 @@
                             <div class="panel-body">
                               <table class="table table-hover">
                                   <thead>
-                                  <tr>
+                                  <tr class="product-list">
                                       <th>Event</th>
                                       <th>Description</th>
                                       <th>Type</th>

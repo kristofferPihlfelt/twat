@@ -121,7 +121,7 @@
                                     <i class="fa fa-tasks fa-fw"></i> Tasks<span class="fa arrow"></span>
                                 </a>
                                 <ul class="nav collapse" id="submenu5" role="menu" aria-labelledby="btn-5">
-                                    <li><a href="{{route('tasks.index')}}">Todo</a></li>
+                                    <li><a href="{{route('tasks.index')}}">All tasks</a></li>
                                 </ul>
                             </li>
 
