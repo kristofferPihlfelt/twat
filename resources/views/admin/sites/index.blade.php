@@ -1,8 +1,5 @@
 @extends('layouts.admin')
 
-
-
-
 @section('content')
 
     <div class="row">
@@ -19,7 +16,9 @@
                             <thead>
                             <tr>
                                 <th>Url</th>
+                                <th>Platform</th>
                                 <th>Description</th>
+                                <th>Credentials</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -28,6 +27,7 @@
 
                                 <tr>
                                     <td>{{$site->url}}</td>
+                                    <td>{{$site->platform}}</td>
                                     <td>{{$site->description}}</td>
                                 </tr>
 

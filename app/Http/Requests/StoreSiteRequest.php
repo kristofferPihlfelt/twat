@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSite extends FormRequest
+class StoreSiteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class StoreSite extends FormRequest
     public function rules()
     {
         return [
-            'url' => 'required|url|unique:sites,url',
+            'url' => 'required|unique:sites,url',
         ];
     }
 }

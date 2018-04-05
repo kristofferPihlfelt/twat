@@ -7,6 +7,13 @@ use App\Traits\Encryptable;
 
 class Site extends Model
 {
+    use Encryptable;
+
+    protected $encryptable = [
+        'credentials_user',
+        'credentials_pass',
+    ];
+
     /**
      * The attributes that are mass assignable.
      *
@@ -17,10 +24,7 @@ class Site extends Model
     ];
 
 
-    use Encryptable;
 
-    protected $encryptable = [
-        'credentials_user',
-        'credentials_pass',
-    ];
+
+
 }

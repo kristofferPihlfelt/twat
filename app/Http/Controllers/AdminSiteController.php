@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreSiteRequest;
 use App\Site;
 use Illuminate\Http\Request;
 
@@ -14,8 +15,11 @@ class AdminSiteController extends Controller
      */
     public function index()
     {
-        $sites = Site::all();
-        return view('admin.sites.index', compact('sites'));
+
+        $sites = Site::all()->sortByDesc('created_at');
+
+        //dd($sites);
+        return view('admin.sites.index')->with(compact('sites'));
     }
 
     /**
@@ -25,7 +29,7 @@ class AdminSiteController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.sites.create');
     }
 
     /**
@@ -34,9 +38,12 @@ class AdminSiteController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSiteRequest $request)
     {
-        //
+        //return $request->credentials_pass;
+        $input = $request->all();
+        Site::create($input);
+        return back()->withInput();
     }
 
     /**

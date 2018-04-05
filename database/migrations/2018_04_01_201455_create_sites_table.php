@@ -18,8 +18,8 @@ class CreateSitesTable extends Migration
             $table->string('url');
             $table->string('platform')->nullable();
             $table->text('description')->nullable();
-            $table->string('credentials_user')->nullable();
-            $table->string('credentials_pass')->nullable();
+            $table->text('credentials_user')->nullable();
+            $table->text('credentials_pass')->nullable();
             $table->string('analytics')->nullable();
             $table->timestamps();
         });

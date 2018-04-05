@@ -5,44 +5,51 @@
     @if(Session::has('added_site'))
         <p class="bg-info">{{session('added_site')}}</p>
     @endif
-
     <div class="row">
-        <h2>Add site</h2>
+        <h2>Add new site</h2>
         <div class="col-sm-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4>Site details</h4>
                 </div>
-                <div class="panel-body>">
-                    <table class="table table-hover table-striped">
-                        <thead>
-                        <tr>
-                            <th>Url</th>
-                            <th>Platform</th>
-                            <th>Description</th>
-                            <th>Username</th>
-                            <th>Password</th>
-                            <th>Analytics</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @if($sites)
+                <div class="panel-body">
 
-                            @foreach($sites as $site)
+                    {!! Form::open(['method'=>'POST', 'action'=>'AdminSiteController@store']) !!}
+                    <div class="form-group">
+                        {!! Form::label('url', 'Url:') !!}
+                        {!! Form::url('url', null, ['class'=>'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('platform', 'Platform:') !!}
+                        {!! Form::text('platform', null, ['class'=>'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('description', 'Description:') !!}
+                        {!! Form::textarea('description', null, ['class'=>'form-control', 'rows'=>3]) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('analytics', 'Analytics:') !!}
+                        {!! Form::text('analytics', null, ['class'=>'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('credentials_user', 'Credentials username:') !!}
+                        {!! Form::text('credentials_user', null, ['class'=>'form-control']) !!}
+                    </div>
+                    <div class="form-group">
+                        {!! Form::label('credentials_pass', 'Credentials password:') !!}
+                        <br>
+                        {!! Form::password('credentials_pass', null, ['class'=>'form-control']) !!}
+                    </div>
 
-                                <tr>
-                                    <td>{{$site-url}}</td>
-                                </tr>
+                    <div class="form-group">
+                        {!! Form::submit('Add Site', ['class'=>'btn btn-primary']) !!}
+                    </div>
+                    {!! Form::close() !!}
 
-                            @endforeach
-
-                        @endif
-
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>
     </div>
+
 
 @stop
