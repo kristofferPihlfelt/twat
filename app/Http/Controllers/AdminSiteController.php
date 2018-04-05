@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Site;
 use Illuminate\Http\Request;
 
-class SiteController extends Controller
+class AdminSiteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,8 @@ class SiteController extends Controller
      */
     public function index()
     {
-        //
+        $sites = Site::all();
+        return view('admin.sites.index', compact('sites'));
     }
 
     /**

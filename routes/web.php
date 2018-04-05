@@ -41,6 +41,9 @@ Route::group(['middleware'=>'admin'], function() {
     Route::resource('/admin/events/productlist', 'AdminEventProductListController');
     Route::post('/admin/events/productlist/store/product', ['as' => 'events.productlist.store.product', 'uses' => 'AdminEventProductListController@storeProduct']);
 
+    // Routes for sites
+    Route::resource('/admin/sites', 'AdminSiteController');
+
     Route::resource('admin/users', 'AdminUsersController');
 
     Route::resource('admin/posts','AdminPostsController');

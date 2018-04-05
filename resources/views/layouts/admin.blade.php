@@ -136,6 +136,17 @@
                                 </ul>
                             </li>
 
+                            <li>
+                                <a href="#" id="btn-7" data-toggle="collapse" data-target="#submenu7" aria-expanded="false">
+                                    <i class="fa fa-television fa-fw"></i> Sites<span class="fa arrow"></span>
+                                </a>
+                                <ul class="nav collapse" id="submenu7" role="menu" aria-labelledby="btn-7">
+                                    <li><a href="{{route('sites.index')}}">All sites</a></li>
+                                    <li><a href="{{route('sites.create')}}">Add site</a></li>
+
+                                </ul>
+                            </li>
+
                         </ul>
                     </nav>
                 </ul>

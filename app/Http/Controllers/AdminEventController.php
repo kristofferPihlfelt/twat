@@ -105,7 +105,7 @@ class AdminEventController extends Controller
         $users = User::where('is_active', 1)->pluck('name', 'id')->all();
         $categories = EventCategory::pluck('name', 'id')->all();
         $channels = EventChannel::pluck('name', 'id')->all();
-        $tasks = Task::all()->sortByDesc('created_at');
+        $tasks = Task::all()->where('event_id', '==', $id)->sortByDesc('created_at');
         //return $tasks;
         return view('admin.events.edit', compact('event', 'users', 'categories', 'channels', 'productlists', 'tasks'));
     }
