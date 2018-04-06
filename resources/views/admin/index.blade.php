@@ -65,7 +65,13 @@
                                     <td>{{$task->title}}</td>
                                     <td>{{$task->task}}</td>
                                     <td>{{$task->event ? $task->event->title : 'no event'}}</td>
-                                    <td>{{$task->assignedTo ? $task->assignedTo->name : 'not assigned'}}</td>
+
+                                    @if(!empty($task->assignedTo) && (Auth::user()->name == $task->assignedTo->name))
+                                        <td><b>{{$task->assignedTo->name}}</b></td>
+                                    @else
+                                        <td>{{$task->assignedTo ? $task->assignedTo->name : 'not assigned'}}</td>
+                                    @endif
+
                                     <td>
                                         {!! Form::open(['method'=>'PATCH', 'action'=>['AdminTaskController@update', $task->id]]) !!}
                                         <input type="hidden" name="is_completed" value="1">
