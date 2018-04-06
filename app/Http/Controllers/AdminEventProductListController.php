@@ -77,7 +77,10 @@ class AdminEventProductListController extends Controller
     public function show($id)
     {
         $products = EventProductListProduct::all()->where('list_id', '==', $id);
-        $productList = EventProductList::all()->where('id', '==', $id);
+        $productList = EventProductList::findOrFail($id);
+
+        /*$productList = EventProductList::all()->where('id', '==', $id);*/
+
         return view('admin.events.productlist.show', compact('products', 'productList', 'id'));
     }
 

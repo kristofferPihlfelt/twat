@@ -106,8 +106,8 @@
                                       <tr class="product-list">
                                           <td>{{$event->title}}</td>
                                           <td>{{$event->description}}</td>
-                                          <td>{{$event->category->name}}</td>
-                                          <td>{{$event->channel->name}}</td>
+                                          <td>{{$event->category ? $event->category->name : 'No category set'}}</td>
+                                          <td>{{$event->channel ? $event->channel->name : 'No chanel set'}}</td>
                                           <td>{{$event->start_date}}</td>
                                           <td>{{$event->end_date}}</td>
                                           <td><a href="{{route('events.edit', $event->id)}}"><button class="btn btn-success btn-sm"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></button></a></td>

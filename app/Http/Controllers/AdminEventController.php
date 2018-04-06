@@ -69,8 +69,8 @@ class AdminEventController extends Controller
         $data = array(
             'title' => $request->title,
             'description' => $request->description,
-            'event_category_id' => $request->category_id,
-            'event_channel_id' => $request->channel_id,
+            'event_category_id' => $request->event_category_id,
+            'event_channel_id' => $request->event_channel_id,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
         );

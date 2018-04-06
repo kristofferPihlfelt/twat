@@ -10,7 +10,8 @@
     @endif
 
     <div class="row">
-        <h3>Product list: <b>{{$productList[0]->name}}</b> for event: <b>{{$productList[0]->event->title}}</b></h3>
+
+        <h3>Product list: <b>{{$productList->name}}</b> for event: <b>{{$productList->event->title}}</b></h3>
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">

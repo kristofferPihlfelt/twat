@@ -26,12 +26,12 @@
                         </div>
 
                         <div class="form-group">
-                            {!! Form::label('category_id', 'Campaign type:') !!}
-                            {!! Form::select('category_id', array(''=>'Select campaign type') + $categories, null, ['class'=>'form-control']) !!}
+                            {!! Form::label('event_category_id', 'Campaign type:') !!}
+                            {!! Form::select('event_category_id', array(''=>'Select campaign type') + $categories, null, ['class'=>'form-control']) !!}
                         </div>
                         <div class="form-group">
-                            {!! Form::label('channel_id', 'Channel:') !!}
-                            {!! Form::select('channel_id', array(''=>'Select Channel') + $channels, null, ['class'=>'form-control']) !!}
+                            {!! Form::label('event_channel_id', 'Channel:') !!}
+                            {!! Form::select('event_channel_id', array(''=>'Select Channel') + $channels, null, ['class'=>'form-control']) !!}
                         </div>
                         <div class="form-group">
                             {!! Form::label('start_date', 'Start date:') !!}
