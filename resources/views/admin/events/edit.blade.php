@@ -6,6 +6,8 @@
         <p class="bg-info">{{session('created_event')}}</p>
     @endif
 
+
+
     <div class="row">
         <h2>Event details</h2>
         <div class="col-md-5 col-sm-12">
@@ -24,13 +26,13 @@
                         {!! Form::textarea('description', null, ['class'=>'form-control', 'rows'=>3]) !!}
                     </div>
                     <div class="form-group">
-                        {!! Form::label('category_id', 'Campaign type:') !!}
-                        {!! Form::select('category_id', $categories, null, ['class'=>'form-control']) !!}
+                        {!! Form::label('event_category_id', 'Campaign type:') !!}
+                        {!! Form::select('event_category_id', $categories, null, ['class'=>'form-control']) !!}
                     </div>
 
                     <div class="form-group">
-                        {!! Form::label('channel_id', 'Channel:') !!}
-                        {!! Form::select('channel_id', $channels, null, ['class'=>'form-control']) !!}
+                        {!! Form::label('event_channel_id', 'Channel:') !!}
+                        {!! Form::select('event_channel_id', $channels, null, ['class'=>'form-control']) !!}
                     </div>
 
                     <div class="form-group">

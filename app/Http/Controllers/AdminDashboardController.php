@@ -39,7 +39,7 @@ class AdminDashboardController extends Controller
 
         $calendar = Calendar::addEvents($events);
         $tasks = Task::all()->sortByDesc('created_at')->where('is_completed', '<', 1)->take(8);
-        $events = Event::all()->sortByDesc('created_at')->where('end_date', '>', Carbon::now())->take(2);
+        $events = Event::all()->sortByDesc('created_at')->where('end_date', '>', Carbon::now());
 
 
         return view('admin.index', compact('calendar', 'tasks', 'events'));

@@ -65,7 +65,6 @@ class AdminEventController extends Controller
      */
     public function store(Request $request)
     {
-
         $data = array(
             'title' => $request->title,
             'description' => $request->description,
