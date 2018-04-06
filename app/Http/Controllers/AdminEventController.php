@@ -9,6 +9,7 @@ use Calendar;
 use App\Event;
 use App\EventCategory;
 use App\EventChannel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -23,7 +24,7 @@ class AdminEventController extends Controller
     {
         
         $events = [];
-        $data = Event::all();
+        $data = Event::all()->where('end_date', '>', Carbon::now())->sortByDesc('end_date');
         if($data->count()) {
             foreach ($data as $key => $value) {
                 $events[] = Calendar::event(
